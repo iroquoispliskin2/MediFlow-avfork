@@ -3,7 +3,7 @@
 **Contribution Number:** [2]  
 **Student:** [Alexandru Voicu]  
 **Issue:** [https://github.com/Nebulyn-Labs/MediFlow/issues/408]  
-**Status:** [Phase I] [In Progress]
+**Status:** [Phase IV] [Completed]
 
 ---
 
@@ -40,65 +40,46 @@ Existing KPI card styles (to merge into the new component)
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+[Flutter web apps are easily tinkered with by opening in chrome through terminal. Setup environment is as easy as having flutter installed]
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
-
-### Reproduction Evidence
-
-- **Commit showing reproduction:** [Link to commit in your fork]
-- **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
-
----
+This fix is less a bug that needs to be reproduced and more of a code cleanup - reformatting the way KPI cards are coded without any functional change
 
 ## Solution Approach
 
+Similar to my original problem, the solution comes in the form of consolidating repeated code as it's own dart file within the repo that hosts a function which can be called back to within the rest of the project. In this problem, I need to create a dart file to build and design KPI cards, and then allow that to be accessed by any other file that original built them manually.
+
 ### Analysis
 
-[Your analysis of the root cause - what's causing the issue?]
+The KPI cards were created on the spot when needed originally, but as they were continuously used, the code began simply taking up space every time. Saving space by simplifying the process will help the codebase remain easy to read and upkeep.
 
 ### Proposed Solution
 
-[High-level description of your fix approach]
+I'm going to create a class, KpiCard, with all the fields that would be needed to produce the original look of the MediFlow project while having enough variables to expand if ever needed. The helper widgets within the .dart file will be able to recreate the function of the original definitions while being significantly more simple in those files that used it than before.
 
 ### Implementation Plan
 
 Using UMPIRE framework (adapted):
 
-**Understand:** [Restate the problem]
+**Understand:** [KPI card creation needs reusable code]
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** [My previous fix included a very similar problem, Having to add a logout confirmation to every part of the codebase that interacted with logging out. To this end, I created a new file with a helper widget that was called in all files that logout.]
 
 **Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+1. [Create kpi_card.dart and helper widgets to build the function]
+2. [import kpi_card.dart into any file that defines KPI cards]
+3. [Replace the original definitions with uses of the helper widget]
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:** [https://github.com/iroquoispliskin2/MediFlow-avfork/tree/fix/dashboard-kpi-widget]
 
-**Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+**Review:** [Self-review checklist - does it follow the project's contribution guidelines? Yes]
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** [If I can implement my change and the site looks identical, It will be successful]
 
 ---
 
 ## Testing Strategy
-
-### Unit Tests
-
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
-
-### Integration Tests
-
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
 
 ### Manual Testing
 
@@ -108,9 +89,9 @@ Using UMPIRE framework (adapted):
 
 ## Implementation Notes
 
-### Week [X] Progress
+### Week [10] Progress
 
-[What you built this week, challenges faced, decisions made]
+[I had to run dart format . to ensure all checks on the PR would be passed. The maintainer said the change itself looked good, so now that I've added a proper description and ran dart flutter, it should be merged]
 
 ### Week [Y] Progress
 
@@ -126,7 +107,7 @@ Using UMPIRE framework (adapted):
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** [https://github.com/Nebulyn-Labs/MediFlow/pull/469]
 
 **PR Description:** [Draft or final PR description - much of the content above can be adapted]
 
@@ -134,7 +115,7 @@ Using UMPIRE framework (adapted):
 - [Date]: [Summary of feedback received]
 - [Date]: [How you addressed it]
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:** [Approved]
 
 ---
 
